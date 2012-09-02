@@ -20,8 +20,7 @@ public class Controle {
     
     public Controle(){
         
-    }
-    
+    }    
     
     public Grafo criaGrafo(String nome) {
         Grafo grafo = new Grafo(nome);
@@ -34,6 +33,10 @@ public class Controle {
     }
     
     public void adicionaAresta(){
+        
+    }
+    
+    public void adicionaNo(){
         
     }
     
