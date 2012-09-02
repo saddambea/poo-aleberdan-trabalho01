@@ -23,13 +23,14 @@ public class Controle {
     }
     
     
-    public int criaGrafo(String nome) {
+    public Grafo criaGrafo(String nome) {
         Grafo grafo = new Grafo(nome);
         this.setId(this.getId() + 1);
         
         listaGrafos.put(this.getId(), grafo);
         
-        return this.getId();
+        //retorno o ID do grafo criado para colocar no combobox da interface
+        return grafo;
     }
     
     public void adicionaAresta(){
