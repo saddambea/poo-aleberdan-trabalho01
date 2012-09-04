@@ -331,7 +331,13 @@ public class Interface extends javax.swing.JFrame {
     private void jButtonCriaNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriaNoActionPerformed
         //chamo o controle, passando o grafo selecionado no combobox
         //e as informações inseridas do nó
-        controle.adicionaNo();
+        String nome = jTextFieldNomeNo.getText();
+        double valor = Double.parseDouble(jTextFieldValorNo.getText());
+        String tipo = (String)jComboBoxTipoNo.getSelectedItem();
+        
+        Grafo grafoSelecionado = (Grafo)jComboBoxGrafos.getSelectedItem();
+        
+        controle.adicionaNo(nome,valor, tipo, grafoSelecionado.getIdGrafo());
     }//GEN-LAST:event_jButtonCriaNoActionPerformed
 
     /**
