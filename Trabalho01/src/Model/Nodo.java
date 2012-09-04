@@ -13,12 +13,12 @@ public class Nodo {
 
     private String nome;
     private double custo;
-    private String estado;
+    private String tipo;
 
-    public Nodo(String nome, double custo, String estado) {
+    public Nodo(String nome, double custo, String tipo) {
         this.setNome(nome);
         this.setCusto(custo);
-        this.setEstado(estado);
+        this.setTipo(tipo);
     }
 
     public double getCusto() {
@@ -29,12 +29,12 @@ public class Nodo {
         this.custo = custo;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getNome() {

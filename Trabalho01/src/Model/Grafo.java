@@ -20,16 +20,21 @@ public class Grafo {
 
     private ArrayList<Aresta> arestasLidas = new ArrayList();
 
-    public Grafo(String nome) {
-        this.nome = nome;
+    public Grafo(String nome, int id) {
+        this.setNome(nome);
+        this.setIdGrafo(id);
     }
 
     public void addAresta() {
 
     }
 
-    public void addNodo() {
+    public void addNodo(String nomeNo, double valorNo, String tipo) {
+        //cria o nó
+        Nodo no = new Nodo(nome, valorNo, tipo);
         
+        //adiciona na lista
+        this.listaNodo.add(no);
     }
 
     public void addArestaLida() {
@@ -51,5 +56,19 @@ public class Grafo {
     @Override
     public String toString() {
         return this.getNome(); 
+    }
+
+    /**
+     * @return the idGrafo
+     */
+    public int getIdGrafo() {
+        return idGrafo;
+    }
+
+    /**
+     * @param idGrafo the idGrafo to set
+     */
+    public void setIdGrafo(int idGrafo) {
+        this.idGrafo = idGrafo;
     }
 }

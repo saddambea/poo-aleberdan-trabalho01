@@ -23,10 +23,12 @@ public class Controle {
     }    
     
     public Grafo criaGrafo(String nome) {
-        Grafo grafo = new Grafo(nome);
+        
         this.setId(this.getId() + 1);
         
-        listaGrafos.put(this.getId(), grafo);
+        Grafo grafo = new Grafo(nome, this.getId());
+        
+        listaGrafos.put(grafo.getIdGrafo(), grafo);
         
         //retorno o ID do grafo criado para colocar no combobox da interface
         return grafo;
@@ -36,15 +38,18 @@ public class Controle {
         
     }
     
-    public void adicionaNo(){
-        
+    public void adicionaNo(String nomeNo, double valorNo, String tipo, int idGrafo){
+        //pego o grafo selecionado
+        Grafo grafoAtual = listaGrafos.get(idGrafo);
+        //removo do hashmao
+        listaGrafos.remove(idGrafo);
+        //adiciono o nó
+        grafoAtual.addNodo(nomeNo, valorNo, tipo);
+        //e coloco ele de volta na lista        
+        listaGrafos.put(idGrafo, grafoAtual);
     }
     
-    /*public void addGrafo(String Nome) {
-    //    Grafo novoGrafo = adiasdiasn
-    //    adiciona arraylist
-    } */
-
+    
     /**
      * @return the id
      */
