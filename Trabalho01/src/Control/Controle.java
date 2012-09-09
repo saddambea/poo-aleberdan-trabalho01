@@ -6,6 +6,7 @@
 package Control;
 
 import Model.Grafo;
+import Model.Nodo;
 import java.util.HashMap;
 
 /**
@@ -34,8 +35,11 @@ public class Controle {
         return grafo;
     }
     
-    public void adicionaAresta(){
-        
+    public void adicionaAresta(String nomeAresta, double valorAresta, Nodo origem, Nodo destino, int idGrafo){        
+        Grafo grafoAtual = listaGrafos.get(idGrafo);
+        listaGrafos.remove(idGrafo);
+        grafoAtual.addAresta(origem, destino, nomeAresta, valorAresta);
+        listaGrafos.put(idGrafo, grafoAtual);
     }
     
     public void adicionaNo(String nomeNo, double valorNo, String tipo, int idGrafo){
