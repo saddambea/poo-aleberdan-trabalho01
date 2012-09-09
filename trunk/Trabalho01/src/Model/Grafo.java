@@ -25,17 +25,22 @@ public class Grafo {
         this.setIdGrafo(id);
     }
 
-    public void addAresta() {
-
+    public Aresta addAresta(Nodo origem, Nodo destino, String nomeAresta, double valorAresta) {
+        Aresta aresta = new Aresta(origem, destino, nomeAresta, valorAresta);
+        this.listaAresta.add(aresta);
+        return aresta;
     }
 
-    public void addNodo(String nomeNo, double valorNo, String tipo) {
+    public Nodo addNodo(String nomeNo, double valorNo, String tipo) {
         //cria o nó
-        Nodo no = new Nodo(nome, valorNo, tipo);
+        Nodo no = new Nodo(nomeNo, valorNo, tipo);
         
         //adiciona na lista
         this.listaNodo.add(no);
+        return no;
     }
+    
+
 
     public void addArestaLida() {
 
