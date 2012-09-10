@@ -458,6 +458,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
         String mensagemCalculo = controle.Calcular((Grafo)jComboBoxGrafos.getSelectedItem());
+        jTextAreaCustoTotal.setText(mensagemCalculo);
     }//GEN-LAST:event_jButtonCalcularActionPerformed
 
     /**

@@ -18,7 +18,7 @@ public class Grafo {
     private ArrayList<Nodo> listaNodo = new ArrayList();
     private ArrayList<Aresta> listaAresta = new ArrayList();
 
-    private ArrayList<Aresta> arestasLidas = new ArrayList();
+    //private ArrayList<Aresta> arestasLidas = new ArrayList();
 
     public Grafo(String nome, int id) {
         this.setNome(nome);
@@ -28,7 +28,7 @@ public class Grafo {
     public void addAresta(Aresta novaAresta) {
         //Aresta aresta = new Aresta(origem, destino, nomeAresta, valorAresta);
         if(novaAresta != null)
-            this.listaAresta.add(novaAresta);
+            this.getListaAresta().add(novaAresta);
         //return aresta;
     }
 
@@ -37,18 +37,14 @@ public class Grafo {
         //Nodo no = new Nodo(nomeNo, valorNo, tipo);        
         //adiciona na lista
         if(novoNodo != null)
-            this.listaNodo.add(novoNodo);
+            this.getListaNodo().add(novoNodo);
         //return no;
     }
 
     public void addArestaLida() {
 
     }
-
-    public ArrayList<Aresta> getArestasNodo(Nodo no) {
-        return null;
-    }
-
+    
     public String getNome() {
         return nome;
     }
@@ -77,8 +73,31 @@ public class Grafo {
     }
     
     public boolean possuiAresta() {
-        if(this.listaAresta.isEmpty())
+        if(this.getListaAresta().isEmpty())
             return false;
         return true;
+    }
+
+    /**
+     * @return the listaNodo
+     */
+    public ArrayList<Nodo> getListaNodo() {
+        return listaNodo;
+    }
+
+    /**
+     * @return the listaAresta
+     */
+    public ArrayList<Aresta> getListaAresta() {
+        return listaAresta;
+    }
+
+    public boolean noTemLigacao(Nodo no) {
+        for(Aresta aresta : listaAresta) {
+            if(aresta.getNodoInicial().equals(no))
+                return true;
+        }
+        
+        return false;
     }
 }

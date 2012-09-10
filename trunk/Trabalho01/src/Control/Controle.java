@@ -8,6 +8,7 @@ package Control;
 import Model.Aresta;
 import Model.Grafo;
 import Model.Nodo;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -99,13 +100,62 @@ public class Controle {
 
     //Método que calcula o custo total e devolve a mensagem
     public String Calcular(Grafo grafoSelecionado) {
-       double somaTotal;
-       //busca a lista de nós
+        String listagem;
+        double acumulaTotal;
+        
+        listagem = "Grafo " + grafoSelecionado.getNome();
+        listagem = listagem.concat("\n\r");
+        
+        //ordeno essa lista, para listar primeiro os Iniciais, depois Intermediarios e depois os Finais
+        ArrayList<Nodo> nodoExistentes = ordernarListaNodos(grafoSelecionado.getListaNodo());
+        //percorrer todos eles
+        for(Nodo no : nodoExistentes) {
+            listagem += "Nó " + no.getNome() + " ("+ no.getTipo() + ", custo "+ String.valueOf(no.getCusto()) + ") ";
+            if(grafoSelecionado.possuiAresta() && grafoSelecionado.noTemLigacao(no)) {
+                listagem += "ligado ";
+                ArrayList<Aresta> arestasNodo = grafoSelecionado.getListaAresta();
+                boolean entrou = false;
+                for(Aresta aresta : arestasNodo) {
+                    if(aresta.getNodoInicial().equals(no)) {
+                        if(entrou)
+                            listagem += ", ";
+                        listagem += "a " + aresta.getNodoFinal() + " por " + aresta.getNome();                        
+                        entrou = true;
+                    }
+                }
+            }
+            listagem += ".\n\r";
+        }           
+        
+        //TODO listar as arestas somando o valor de cada aresta e cada nó
         
         
         
+        return listagem;
+    }
+
+    private ArrayList<Nodo> ordernarListaNodos(ArrayList<Nodo> listaNodo) {
+        ArrayList<Nodo> listaOrdenada = new ArrayList<Nodo>();
         
-        return "";
+        for(Nodo no : listaNodo) {
+            if(no.getTipo().equals("Inicial")) {
+                listaOrdenada.add(no);
+            }
+        }
+        
+        for(Nodo no : listaNodo) {
+            if(no.getTipo().equals("Intermediário")) {
+                listaOrdenada.add(no);
+            }
+        }
+        
+        for(Nodo no : listaNodo) {
+            if(no.getTipo().equals("Final")) {
+                listaOrdenada.add(no);
+            }
+        }
+        
+        return listaOrdenada;
     }
 
 
