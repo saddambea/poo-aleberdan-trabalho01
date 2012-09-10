@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author saddam
+ * @author Bernardo
  */
 public class Grafo {
 
@@ -25,22 +25,21 @@ public class Grafo {
         this.setIdGrafo(id);
     }
 
-    public Aresta addAresta(Nodo origem, Nodo destino, String nomeAresta, double valorAresta) {
-        Aresta aresta = new Aresta(origem, destino, nomeAresta, valorAresta);
-        this.listaAresta.add(aresta);
-        return aresta;
+    public void addAresta(Aresta novaAresta) {
+        //Aresta aresta = new Aresta(origem, destino, nomeAresta, valorAresta);
+        if(novaAresta != null)
+            this.listaAresta.add(novaAresta);
+        //return aresta;
     }
 
-    public Nodo addNodo(String nomeNo, double valorNo, String tipo) {
+    public void addNodo(Nodo novoNodo) {
         //cria o nó
-        Nodo no = new Nodo(nomeNo, valorNo, tipo);
-        
+        //Nodo no = new Nodo(nomeNo, valorNo, tipo);        
         //adiciona na lista
-        this.listaNodo.add(no);
-        return no;
+        if(novoNodo != null)
+            this.listaNodo.add(novoNodo);
+        //return no;
     }
-    
-
 
     public void addArestaLida() {
 
