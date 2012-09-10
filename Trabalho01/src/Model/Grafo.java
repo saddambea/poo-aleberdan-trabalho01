@@ -75,4 +75,10 @@ public class Grafo {
     public void setIdGrafo(int idGrafo) {
         this.idGrafo = idGrafo;
     }
+    
+    public boolean possuiAresta() {
+        if(this.listaAresta.isEmpty())
+            return false;
+        return true;
+    }
 }
