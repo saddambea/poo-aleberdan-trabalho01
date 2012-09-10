@@ -30,15 +30,15 @@ public class Controle {
         
         Grafo grafo = new Grafo(nome, this.getId());
         
-        listaGrafos.put(grafo.getIdGrafo(), grafo);
+        getListaGrafos().put(grafo.getIdGrafo(), grafo);
         
         //retorno o ID do grafo criado para colocar no combobox da interface
         return grafo;
     }
     
     public void adicionaAresta(String nomeAresta, double valorAresta, Nodo origem, Nodo destino, int idGrafo){        
-        Grafo grafoAtual = listaGrafos.get(idGrafo);
-        listaGrafos.remove(idGrafo);
+        Grafo grafoAtual = getListaGrafos().get(idGrafo);
+        getListaGrafos().remove(idGrafo);
         
         //crio a aresta
         Aresta novaAresta = new Aresta(origem, destino, nomeAresta, valorAresta);
@@ -46,14 +46,14 @@ public class Controle {
         //adiciono ela no grafo
         grafoAtual.addAresta(novaAresta);        
         
-        listaGrafos.put(idGrafo, grafoAtual);
+        getListaGrafos().put(idGrafo, grafoAtual);
     }
     
     public Nodo adicionaNo(String nomeNo, double valorNo, String tipo, int idGrafo){
         //pego o grafo selecionado
-        Grafo grafoAtual = listaGrafos.get(idGrafo);
+        Grafo grafoAtual = getListaGrafos().get(idGrafo);
         //removo do hashmao
-        listaGrafos.remove(idGrafo);
+        getListaGrafos().remove(idGrafo);
         
         //crio o nó        
         Nodo novoNodo = new Nodo(nomeNo, valorNo, tipo);
@@ -62,7 +62,7 @@ public class Controle {
         grafoAtual.addNodo(novoNodo);
         
         //e coloco ele de volta na lista        
-        listaGrafos.put(idGrafo, grafoAtual);
+        getListaGrafos().put(idGrafo, grafoAtual);
         
         return novoNodo;
     }
@@ -79,6 +79,33 @@ public class Controle {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the listaGrafos
+     */
+    public boolean grafoTemAresta(Grafo grafoSelecionado) {
+        if(grafoSelecionado.possuiAresta())
+            return true;
+        return false;
+    }
+
+    /**
+     * @return the listaGrafos
+     */
+    public HashMap<Integer,Grafo> getListaGrafos() {
+        return listaGrafos;
+    }
+
+    //Método que calcula o custo total e devolve a mensagem
+    public String Calcular(Grafo grafoSelecionado) {
+       double somaTotal;
+       //busca a lista de nós
+        
+        
+        
+        
+        return "";
     }
 
 

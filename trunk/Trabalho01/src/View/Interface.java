@@ -89,6 +89,12 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxGrafos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxGrafosActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Grafo Selecionado");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -308,6 +314,11 @@ public class Interface extends javax.swing.JFrame {
 
         jButtonCalcular.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonCalcular.setText("Calcular Grafo");
+        jButtonCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalcularActionPerformed(evt);
+            }
+        });
 
         jButtonLimpaInformacoes.setText("Limpar Informações");
         jButtonLimpaInformacoes.addActionListener(new java.awt.event.ActionListener() {
@@ -364,6 +375,8 @@ public class Interface extends javax.swing.JFrame {
         }else{
             if(!jButtonCriaNo.isEnabled())
                 jButtonCriaNo.setEnabled(true);
+            if(jButtonCriaAresta.isEnabled())
+                jButtonCriaAresta.setEnabled(false);
             
             Grafo novoGrafo = controle.criaGrafo(jTextNomeGrafo.getText());
         
@@ -403,10 +416,6 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCriaNoActionPerformed
 
     private void jButtonCriaArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriaArestaActionPerformed
-
-        if(jButtonCriaNo.isEnabled()) 
-            jButtonCriaNo.setEnabled(false);
-        
         try{
             if(jTextFieldNomeAresta.getText().isEmpty() || jTextFieldValorAresta.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Preencha os campos de Aresta corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -419,6 +428,11 @@ public class Interface extends javax.swing.JFrame {
                 Grafo grafoSelecionado = (Grafo)jComboBoxGrafos.getSelectedItem();
 
                 controle.adicionaAresta(nome, valor, nodoInicial, nodoFinal, grafoSelecionado.getIdGrafo());                
+                
+                if(jButtonCriaNo.isEnabled()) 
+                    jButtonCriaNo.setEnabled(false);
+                if(!jButtonCalcular.isEnabled())
+                    jButtonCalcular.setEnabled(true);
             }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Digite o campo Valor corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -432,6 +446,19 @@ public class Interface extends javax.swing.JFrame {
     private void jButtonLimpaInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpaInformacoesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLimpaInformacoesActionPerformed
+
+    private void jComboBoxGrafosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxGrafosActionPerformed
+        Grafo grafo = (Grafo) jComboBoxGrafos.getSelectedItem();
+        if(grafo.possuiAresta() && !jButtonCalcular.isEnabled())
+            jButtonCalcular.setEnabled(true);
+        else
+            jButtonCalcular.setEnabled(false);
+        grafo = null;
+    }//GEN-LAST:event_jComboBoxGrafosActionPerformed
+
+    private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
+        String mensagemCalculo = controle.Calcular((Grafo)jComboBoxGrafos.getSelectedItem());
+    }//GEN-LAST:event_jButtonCalcularActionPerformed
 
     /**
      * @param args the command line arguments
