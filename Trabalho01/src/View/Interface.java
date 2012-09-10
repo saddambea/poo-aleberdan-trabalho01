@@ -22,6 +22,11 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents(); 
+        //desabilito os botoes de criar nó,criar aresta e calcular grafo
+        jButtonCriaAresta.setEnabled(false);
+        jButtonCriaNo.setEnabled(false);
+        jButtonCalcular.setEnabled(false);
+        //crio o objeto que irá controlar as operações feitas pelo usuario na interface
         controle = new Controle();
     }
 
@@ -65,6 +70,7 @@ public class Interface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaCustoTotal = new javax.swing.JTextArea();
         jButtonCalcular = new javax.swing.JButton();
+        jButtonLimpaInformacoes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POO - Trabalho 01 - Alexandre, Bernardo e Daniel - Pós Web 10");
@@ -300,7 +306,15 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButtonCalcular.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButtonCalcular.setText("Calcular Grafo");
+
+        jButtonLimpaInformacoes.setText("Limpar Informações");
+        jButtonLimpaInformacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpaInformacoesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -313,9 +327,12 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCalcular))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonCalcular)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLimpaInformacoes)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -330,7 +347,9 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCalcular)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonCalcular)
+                            .addComponent(jButtonLimpaInformacoes))
                         .addGap(17, 17, 17)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -341,14 +360,15 @@ public class Interface extends javax.swing.JFrame {
 
     private void jButtonCriaGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriaGrafoActionPerformed
         if(jTextNomeGrafo.getText()==null || jTextNomeGrafo.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Informe um nome para o grafo!");
+            JOptionPane.showMessageDialog(this, "Informe um nome para o grafo!", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
+            if(!jButtonCriaNo.isEnabled())
+                jButtonCriaNo.setEnabled(true);
+            
             Grafo novoGrafo = controle.criaGrafo(jTextNomeGrafo.getText());
         
             jComboBoxGrafos.addItem(novoGrafo);
             jComboBoxGrafos.setSelectedItem(novoGrafo);
-            
-            
         }        
     }//GEN-LAST:event_jButtonCriaGrafoActionPerformed
 
@@ -357,59 +377,61 @@ public class Interface extends javax.swing.JFrame {
         //e as informações inseridas do nó
         try{
             if(jTextFieldNomeNo.getText().isEmpty() || jTextFieldValorNo.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Preencha os campos do Nó corretamente!");
-            }else{
+                JOptionPane.showMessageDialog(this, "Preencha os campos do Nó corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
                 String nome = jTextFieldNomeNo.getText();
                 double valor = Double.parseDouble(jTextFieldValorNo.getText());
                 String tipo = (String)jComboBoxTipoNo.getSelectedItem();
 
                 Grafo grafoSelecionado = (Grafo)jComboBoxGrafos.getSelectedItem();        
+                    
+                Nodo novoNo = controle.adicionaNo(nome,valor, tipo, grafoSelecionado.getIdGrafo());              
+                   
+                jComboBoxNoOrigem.addItem(novoNo);
+                jComboBoxNoDestino.addItem(novoNo);
                 
-               
-                    
-                    
-              controle.adicionaNo(nome,valor, tipo, grafoSelecionado.getIdGrafo());              
-                    
-                    
-                    
-              jComboBoxNoOrigem.addItem(nome);
-              jComboBoxNoDestino.addItem(nome);
-                    
-                
+                if(!jButtonCriaAresta.isEnabled())
+                    jButtonCriaAresta.setEnabled(true);
             }       
-                    
-        }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Digite o campo Valor corretamente!");
+                     
+        } catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Digite o campo Valor corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
         
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(this, "Selecione um grafo!");
+        } catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this, "Selecione um grafo!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonCriaNoActionPerformed
 
     private void jButtonCriaArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriaArestaActionPerformed
-        // TODO add your handling code here:
+
+        if(jButtonCriaNo.isEnabled()) 
+            jButtonCriaNo.setEnabled(false);
+        
         try{
             if(jTextFieldNomeAresta.getText().isEmpty() || jTextFieldValorAresta.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Preencha os campos de Aresta corretamente!");
-            }else{
+                JOptionPane.showMessageDialog(this, "Preencha os campos de Aresta corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {                
                 String nome  = jTextFieldNomeAresta.getText();
                 double valor = Double.parseDouble(jTextFieldValorAresta.getText());
-        
+
                 Nodo nodoInicial = (Nodo)jComboBoxNoOrigem.getSelectedItem();
                 Nodo nodoFinal = (Nodo)jComboBoxNoDestino.getSelectedItem();   
                 Grafo grafoSelecionado = (Grafo)jComboBoxGrafos.getSelectedItem();
-            
-                controle.adicionaAresta(nome, valor, nodoInicial, nodoFinal, grafoSelecionado.getIdGrafo());
+
+                controle.adicionaAresta(nome, valor, nodoInicial, nodoFinal, grafoSelecionado.getIdGrafo());                
             }
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Digite o campo Valor corretamente!");
-        }
-          
+            JOptionPane.showMessageDialog(this, "Digite o campo Valor corretamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }          
     }//GEN-LAST:event_jButtonCriaArestaActionPerformed
 
     private void jComboBoxTipoNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoNoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoNoActionPerformed
+
+    private void jButtonLimpaInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpaInformacoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLimpaInformacoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,7 +463,7 @@ public class Interface extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interface().setVisible(true);
+                new Interface().setVisible(true);                
             }
         });
     }
@@ -450,6 +472,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCriaAresta;
     private javax.swing.JButton jButtonCriaGrafo;
     private javax.swing.JButton jButtonCriaNo;
+    private javax.swing.JButton jButtonLimpaInformacoes;
     private javax.swing.JComboBox jComboBoxGrafos;
     private javax.swing.JComboBox jComboBoxNoDestino;
     private javax.swing.JComboBox jComboBoxNoOrigem;

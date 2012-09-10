@@ -5,13 +5,14 @@
 
 package Control;
 
+import Model.Aresta;
 import Model.Grafo;
 import Model.Nodo;
 import java.util.HashMap;
 
 /**
  *
- * @author saddam
+ * @author Bernardo
  */
 public class Controle {
     
@@ -38,22 +39,34 @@ public class Controle {
     public void adicionaAresta(String nomeAresta, double valorAresta, Nodo origem, Nodo destino, int idGrafo){        
         Grafo grafoAtual = listaGrafos.get(idGrafo);
         listaGrafos.remove(idGrafo);
-        grafoAtual.addAresta(origem, destino, nomeAresta, valorAresta);
+        
+        //crio a aresta
+        Aresta novaAresta = new Aresta(origem, destino, nomeAresta, valorAresta);
+
+        //adiciono ela no grafo
+        grafoAtual.addAresta(novaAresta);        
+        
         listaGrafos.put(idGrafo, grafoAtual);
     }
     
-    public void adicionaNo(String nomeNo, double valorNo, String tipo, int idGrafo){
+    public Nodo adicionaNo(String nomeNo, double valorNo, String tipo, int idGrafo){
         //pego o grafo selecionado
         Grafo grafoAtual = listaGrafos.get(idGrafo);
         //removo do hashmao
         listaGrafos.remove(idGrafo);
-        //adiciono o nó
-        grafoAtual.addNodo(nomeNo, valorNo, tipo);
+        
+        //crio o nó        
+        Nodo novoNodo = new Nodo(nomeNo, valorNo, tipo);
+        
+        //adiciona na lista
+        grafoAtual.addNodo(novoNodo);
+        
         //e coloco ele de volta na lista        
         listaGrafos.put(idGrafo, grafoAtual);
+        
+        return novoNodo;
     }
-    
-    
+        
     /**
      * @return the id
      */

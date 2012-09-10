@@ -7,7 +7,7 @@ package Model;
 
 /**
  *
- * @author saddam
+ * @author Bernardo
  */
 public class Aresta {
 
