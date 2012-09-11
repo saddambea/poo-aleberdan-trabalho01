@@ -9,6 +9,7 @@ import Model.Aresta;
 import Model.Grafo;
 import Model.Nodo;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -19,7 +20,6 @@ public class Controle {
     
     private HashMap<Integer,Grafo> listaGrafos = new HashMap();
     private int id = -1;
-    //private Grafo grafo;
     
     public Controle(){
         
@@ -37,7 +37,7 @@ public class Controle {
         return grafo;
     }
     
-    public void adicionaAresta(String nomeAresta, double valorAresta, Nodo origem, Nodo destino, int idGrafo){        
+    public Aresta adicionaAresta(String nomeAresta, double valorAresta, Nodo origem, Nodo destino, int idGrafo){        
         Grafo grafoAtual = getListaGrafos().get(idGrafo);
         getListaGrafos().remove(idGrafo);
         
@@ -48,6 +48,8 @@ public class Controle {
         grafoAtual.addAresta(novaAresta);        
         
         getListaGrafos().put(idGrafo, grafoAtual);
+        
+        return novaAresta;
     }
     
     public Nodo adicionaNo(String nomeNo, double valorNo, String tipo, int idGrafo){
@@ -101,10 +103,10 @@ public class Controle {
     //Método que calcula o custo total e devolve a mensagem
     public String Calcular(Grafo grafoSelecionado) {
         String listagem;
-        double acumulaTotal;
+        double acumulaTotal = 0;
         
         listagem = "Grafo " + grafoSelecionado.getNome();
-        listagem = listagem.concat("\n\r");
+        listagem = listagem.concat("\n\r\n\r");
         
         //ordeno essa lista, para listar primeiro os Iniciais, depois Intermediarios e depois os Finais
         ArrayList<Nodo> nodoExistentes = ordernarListaNodos(grafoSelecionado.getListaNodo());
@@ -124,13 +126,29 @@ public class Controle {
                     }
                 }
             }
-            listagem += ".\n\r";
-        }           
+            listagem += ".\n\r\n\r";
+        }
         
         //TODO listar as arestas somando o valor de cada aresta e cada nó
+        ArrayList<Aresta> arestaExistente = grafoSelecionado.getListaAresta();
+        //ordeno a lista pelo nome
+        Collections.sort(arestaExistente);
         
-        
-        
+        for(Aresta aresta : arestaExistente) {
+            
+            Nodo noInicial = aresta.getNodoInicial();
+            Nodo noFinal = aresta.getNodoFinal();
+            double custoAresta = aresta.getCusto();
+            
+            acumulaTotal += custoAresta;
+            acumulaTotal += noInicial.getCusto();
+            acumulaTotal += noFinal.getCusto();
+                    
+            listagem += "Aresta " + aresta.getNome() + " (custo " + String.valueOf(custoAresta) +")";
+            listagem += " liga " + noInicial.getNome() + " a " + noFinal.getNome() + ".\n\r\n\r" ;  
+        }
+        listagem += "Custo total do grafo "+ grafoSelecionado.getNome() + ": "+ String.valueOf(acumulaTotal) + ".";
+                
         return listagem;
     }
 
@@ -157,6 +175,5 @@ public class Controle {
         
         return listaOrdenada;
     }
-
 
 }
