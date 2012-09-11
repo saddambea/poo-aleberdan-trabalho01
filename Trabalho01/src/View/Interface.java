@@ -5,8 +5,10 @@
 package View;
 
 import Control.Controle;
+import Model.Aresta;
 import Model.Grafo;
 import Model.Nodo;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -65,6 +67,8 @@ public class Interface extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jComboBoxNoDestino = new javax.swing.JComboBox();
         jButtonCriaAresta = new javax.swing.JButton();
+        jComboBoxArestasExistentes = new javax.swing.JComboBox();
+        jLabel13 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -108,21 +112,21 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBoxGrafos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextNomeGrafo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonCriaGrafo)))
+                        .addComponent(jComboBoxGrafos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(jTextNomeGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCriaGrafo)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,17 +179,17 @@ public class Interface extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldValorNo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNomeNo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxTipoNo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonCriaNo))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel4)))
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,18 +197,18 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldNomeNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldValorNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jTextFieldValorNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTipoNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCriaNo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -227,6 +231,8 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setText("Arestas cadastradas");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -240,18 +246,21 @@ public class Interface extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jComboBoxNoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonCriaAresta))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextFieldValorAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextFieldNomeAresta)
-                                .addComponent(jComboBoxNoOrigem, 0, 115, Short.MAX_VALUE)))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                                .addComponent(jComboBoxNoOrigem, 0, 115, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jComboBoxArestasExistentes, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxNoDestino, javax.swing.GroupLayout.Alignment.LEADING, 0, 115, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonCriaAresta)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +285,11 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBoxNoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonCriaAresta)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxArestasExistentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -308,7 +321,7 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -382,6 +395,7 @@ public class Interface extends javax.swing.JFrame {
         
             jComboBoxGrafos.addItem(novoGrafo);
             jComboBoxGrafos.setSelectedItem(novoGrafo);
+            jTextNomeGrafo.setText("");
         }        
     }//GEN-LAST:event_jButtonCriaGrafoActionPerformed
 
@@ -402,6 +416,9 @@ public class Interface extends javax.swing.JFrame {
                    
                 jComboBoxNoOrigem.addItem(novoNo);
                 jComboBoxNoDestino.addItem(novoNo);
+                
+                jTextFieldNomeNo.setText("");
+                jTextFieldValorNo.setText("");
                 
                 if(!jButtonCriaAresta.isEnabled())
                     jButtonCriaAresta.setEnabled(true);
@@ -427,7 +444,12 @@ public class Interface extends javax.swing.JFrame {
                 Nodo nodoFinal = (Nodo)jComboBoxNoDestino.getSelectedItem();   
                 Grafo grafoSelecionado = (Grafo)jComboBoxGrafos.getSelectedItem();
 
-                controle.adicionaAresta(nome, valor, nodoInicial, nodoFinal, grafoSelecionado.getIdGrafo());                
+                Aresta novaAresta = controle.adicionaAresta(nome, valor, nodoInicial, nodoFinal, grafoSelecionado.getIdGrafo());                
+                
+                jComboBoxArestasExistentes.addItem(novaAresta);
+                
+                jTextFieldNomeAresta.setText("");
+                jTextFieldValorAresta.setText("");
                 
                 if(jButtonCriaNo.isEnabled()) 
                     jButtonCriaNo.setEnabled(false);
@@ -444,15 +466,44 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoNoActionPerformed
 
     private void jButtonLimpaInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpaInformacoesActionPerformed
-        // TODO add your handling code here:
+        this.removeItems();
+        controle = null;
+        controle = new Controle();
     }//GEN-LAST:event_jButtonLimpaInformacoesActionPerformed
 
     private void jComboBoxGrafosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxGrafosActionPerformed
         Grafo grafo = (Grafo) jComboBoxGrafos.getSelectedItem();
-        if(grafo.possuiAresta() && !jButtonCalcular.isEnabled())
+        //atualizar também os ComboBoxes de Nós e Arestas
+        
+        
+        if(grafo.possuiAresta()) {
+            jButtonCriaAresta.setEnabled(true);
+            jButtonCriaNo.setEnabled(false);
             jButtonCalcular.setEnabled(true);
-        else
+            
+            //busco a lista de Arestas, e carrego no Combo
+            ArrayList<Aresta> arestas = grafo.getListaAresta();
+            
+            for(Aresta aresta : arestas) {
+                jComboBoxArestasExistentes.addItem(aresta);
+            }            
+            
+        } else {            
+            jButtonCriaNo.setEnabled(true);
             jButtonCalcular.setEnabled(false);
+        }
+        if(grafo.possuiNo()) {
+            ArrayList<Nodo> nodoExistentes = grafo.getListaNodo();
+            for(Nodo nodo : nodoExistentes) {
+                jComboBoxNoOrigem.addItem(nodo);
+                jComboBoxNoDestino.addItem(nodo);
+            }                
+            jButtonCriaAresta.setEnabled(true);
+        }                
+        else {                
+            jButtonCriaAresta.setEnabled(false);
+        }                
+        
         grafo = null;
     }//GEN-LAST:event_jComboBoxGrafosActionPerformed
 
@@ -501,6 +552,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCriaGrafo;
     private javax.swing.JButton jButtonCriaNo;
     private javax.swing.JButton jButtonLimpaInformacoes;
+    private javax.swing.JComboBox jComboBoxArestasExistentes;
     private javax.swing.JComboBox jComboBoxGrafos;
     private javax.swing.JComboBox jComboBoxNoDestino;
     private javax.swing.JComboBox jComboBoxNoOrigem;
@@ -509,6 +561,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -529,4 +582,18 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldValorNo;
     private javax.swing.JTextField jTextNomeGrafo;
     // End of variables declaration//GEN-END:variables
+
+    private void removeItems() {
+        jComboBoxGrafos.removeAll();
+        jComboBoxGrafos.removeAllItems();
+        
+        jComboBoxNoOrigem.removeAll();
+        jComboBoxNoOrigem.removeAllItems();
+        
+        jComboBoxNoDestino.removeAll();
+        jComboBoxNoDestino.removeAllItems();
+        
+        jComboBoxArestasExistentes.removeAll();
+        jComboBoxArestasExistentes.removeAllItems();
+    }
 }

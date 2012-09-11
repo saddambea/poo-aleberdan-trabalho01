@@ -9,7 +9,7 @@ package Model;
  *
  * @author Bernardo
  */
-public class Aresta {
+public class Aresta implements Comparable<Aresta>{
 
     private Nodo nodoInicial;
     private Nodo nodoFinal;
@@ -58,6 +58,10 @@ public class Aresta {
     @Override
     public String toString(){
         return this.getNome();
+    }
+
+    public int compareTo(Aresta o) {
+        return nome.compareTo(o.getNome());
     }
 
 }

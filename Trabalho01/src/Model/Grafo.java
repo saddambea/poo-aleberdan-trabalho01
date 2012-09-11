@@ -100,4 +100,10 @@ public class Grafo {
         
         return false;
     }
+
+    public boolean possuiNo() {
+        if(this.getListaNodo().isEmpty())
+            return false;
+        return true;
+    }
 }
