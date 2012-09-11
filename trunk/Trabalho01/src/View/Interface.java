@@ -396,6 +396,7 @@ public class Interface extends javax.swing.JFrame {
             jComboBoxGrafos.addItem(novoGrafo);
             jComboBoxGrafos.setSelectedItem(novoGrafo);
             jTextNomeGrafo.setText("");
+            jTextAreaCustoTotal.setText("");
         }        
     }//GEN-LAST:event_jButtonCriaGrafoActionPerformed
 
@@ -466,17 +467,26 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoNoActionPerformed
 
     private void jButtonLimpaInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpaInformacoesActionPerformed
-        this.removeItems();
+        this.removeItems(false);
+        jButtonCalcular.setEnabled(false);
+        jButtonCriaAresta.setEnabled(false);
+        jButtonCriaGrafo.setEnabled(true);
+        jButtonCriaNo.setEnabled(false);
         controle = null;
         controle = new Controle();
+        
+        JOptionPane.showMessageDialog(this, "Informações excluídas com sucesso", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonLimpaInformacoesActionPerformed
 
     private void jComboBoxGrafosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxGrafosActionPerformed
         Grafo grafo = (Grafo) jComboBoxGrafos.getSelectedItem();
         //atualizar também os ComboBoxes de Nós e Arestas
+                
+        removeItems(true);
+        jTextAreaCustoTotal.setText("");
         
-        
-        if(grafo.possuiAresta()) {
+        try {
+             if(grafo.possuiAresta()) {
             jButtonCriaAresta.setEnabled(true);
             jButtonCriaNo.setEnabled(false);
             jButtonCalcular.setEnabled(true);
@@ -505,6 +515,9 @@ public class Interface extends javax.swing.JFrame {
         }                
         
         grafo = null;
+        } catch (Exception e) {
+            
+        }
     }//GEN-LAST:event_jComboBoxGrafosActionPerformed
 
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
@@ -583,9 +596,11 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTextField jTextNomeGrafo;
     // End of variables declaration//GEN-END:variables
 
-    private void removeItems() {
-        jComboBoxGrafos.removeAll();
-        jComboBoxGrafos.removeAllItems();
+    private void removeItems(boolean grafo) {
+        if(!grafo) {
+            jComboBoxGrafos.removeAll();
+            jComboBoxGrafos.removeAllItems();    
+        }        
         
         jComboBoxNoOrigem.removeAll();
         jComboBoxNoOrigem.removeAllItems();

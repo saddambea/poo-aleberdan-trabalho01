@@ -17,32 +17,21 @@ public class Grafo {
     private String nome;
     private ArrayList<Nodo> listaNodo = new ArrayList();
     private ArrayList<Aresta> listaAresta = new ArrayList();
-
-    //private ArrayList<Aresta> arestasLidas = new ArrayList();
-
+   
     public Grafo(String nome, int id) {
         this.setNome(nome);
         this.setIdGrafo(id);
     }
 
     public void addAresta(Aresta novaAresta) {
-        //Aresta aresta = new Aresta(origem, destino, nomeAresta, valorAresta);
         if(novaAresta != null)
             this.getListaAresta().add(novaAresta);
-        //return aresta;
     }
 
     public void addNodo(Nodo novoNodo) {
         //cria o nó
-        //Nodo no = new Nodo(nomeNo, valorNo, tipo);        
-        //adiciona na lista
         if(novoNodo != null)
             this.getListaNodo().add(novoNodo);
-        //return no;
-    }
-
-    public void addArestaLida() {
-
     }
     
     public String getNome() {

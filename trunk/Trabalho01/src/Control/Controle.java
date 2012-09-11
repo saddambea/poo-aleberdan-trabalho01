@@ -126,8 +126,10 @@ public class Controle {
                     }
                 }
             }
-            listagem += ".\n\r\n\r";
+            listagem += ".\n\r";
         }
+        
+        listagem += "\n\r";
         
         //TODO listar as arestas somando o valor de cada aresta e cada nó
         ArrayList<Aresta> arestaExistente = grafoSelecionado.getListaAresta();
@@ -145,9 +147,9 @@ public class Controle {
             acumulaTotal += noFinal.getCusto();
                     
             listagem += "Aresta " + aresta.getNome() + " (custo " + String.valueOf(custoAresta) +")";
-            listagem += " liga " + noInicial.getNome() + " a " + noFinal.getNome() + ".\n\r\n\r" ;  
+            listagem += " liga " + noInicial.getNome() + " a " + noFinal.getNome() + ".\n\r" ;  
         }
-        listagem += "Custo total do grafo "+ grafoSelecionado.getNome() + ": "+ String.valueOf(acumulaTotal) + ".";
+        listagem += "\n\rCusto total do grafo "+ grafoSelecionado.getNome() + ": "+ String.valueOf(acumulaTotal) + ".";
                 
         return listagem;
     }
